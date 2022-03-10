@@ -25,12 +25,12 @@ class ProductView extends StatelessWidget {
                           return Column(
                             children: [
                               SizedBox(
-                                height: 700,
+                                height: 750,
                                 child: GridView.builder(
                                   gridDelegate:
                                       const SliverGridDelegateWithFixedCrossAxisCount(
                                           crossAxisCount: 2),
-                                  itemCount: viewModel.productModel?.length,
+                                  itemCount: 5,
                                   itemBuilder:
                                       (BuildContext context, int index) {
                                     return Card(
