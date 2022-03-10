@@ -8,6 +8,7 @@ class ProductView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    double height = MediaQuery.of(context).size.height;
     return BaseView<ProductViewModel>(
       viewModel: ProductViewModel(),
       onModelReady: (model) {
@@ -25,7 +26,7 @@ class ProductView extends StatelessWidget {
                           return Column(
                             children: [
                               SizedBox(
-                                height: 750,
+                                height: height,
                                 child: GridView.builder(
                                   gridDelegate:
                                       const SliverGridDelegateWithFixedCrossAxisCount(

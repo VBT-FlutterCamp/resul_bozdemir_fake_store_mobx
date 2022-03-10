@@ -1,4 +1,16 @@
+// To parse this JSON data, do
+//
+//     final productModel = productModelFromJson(jsonString);
+
+import 'dart:convert';
+
 import 'package:vexana/vexana.dart';
+
+List<ProductModel> productModelFromJson(String str) => List<ProductModel>.from(
+    json.decode(str).map((x) => ProductModel.fromJson(x)));
+
+String productModelToJson(List<ProductModel> data) =>
+    json.encode(List<dynamic>.from(data.map((x) => x.toJson())));
 
 class ProductModel extends INetworkModel {
   ProductModel({
@@ -8,6 +20,7 @@ class ProductModel extends INetworkModel {
     this.description,
     this.category,
     this.image,
+    this.rating,
   });
 
   int? id;
@@ -16,6 +29,7 @@ class ProductModel extends INetworkModel {
   String? description;
   String? category;
   String? image;
+  Rating? rating;
 
   factory ProductModel.fromJson(Map<String, dynamic> json) => ProductModel(
         id: json["id"],
@@ -24,6 +38,7 @@ class ProductModel extends INetworkModel {
         description: json["description"],
         category: json["category"],
         image: json["image"],
+        rating: Rating.fromJson(json["rating"]),
       );
 
   @override
@@ -34,6 +49,7 @@ class ProductModel extends INetworkModel {
         "description": description,
         "category": category,
         "image": image,
+        "rating": rating?.toJson(),
       };
 
   @override
@@ -45,6 +61,27 @@ class ProductModel extends INetworkModel {
       description: json["description"],
       category: json["category"],
       image: json["image"],
+      rating: json["rating"],
     );
   }
+}
+
+class Rating {
+  Rating({
+    this.rate,
+    this.count,
+  });
+
+  double? rate;
+  int? count;
+
+  factory Rating.fromJson(Map<String, dynamic> json) => Rating(
+        rate: json["rate"].toDouble(),
+        count: json["count"],
+      );
+
+  Map<String, dynamic> toJson() => {
+        "rate": rate,
+        "count": count,
+      };
 }
